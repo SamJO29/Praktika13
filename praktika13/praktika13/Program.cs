@@ -7,12 +7,12 @@
     {
         static void Main(string[] args)
         {
-            while (true) // Бесконечный цикл для повторного выбора заданий
+            while (true)
             {
                 Console.WriteLine("\nВыберите задание (1-24) или 0 для выхода:");
                 string input = Console.ReadLine();
 
-                // Проверка на выход из программы
+                
                 if (input == "0")
                 {
                     Console.WriteLine("Выход из программы...");
@@ -25,7 +25,7 @@
                     continue;
                 }
 
-                // Вызов соответствующего задания
+                // Вызовы  задания
                 switch (task)
                 {
                     case 1:
@@ -104,7 +104,7 @@
 
                 Console.WriteLine("\nНажмите любую клавишу для продолжения...");
                 Console.ReadKey();
-                Console.Clear(); // Очистка экрана перед следующим выбором
+                Console.Clear(); 
             }
         }
 
