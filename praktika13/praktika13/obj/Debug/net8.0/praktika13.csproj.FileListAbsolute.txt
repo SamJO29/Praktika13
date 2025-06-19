@@ -1,0 +1,14 @@
+C:\visualSTUDIO)projiects\praktika13\praktika13\bin\Debug\net8.0\praktika13.exe
+C:\visualSTUDIO)projiects\praktika13\praktika13\bin\Debug\net8.0\praktika13.deps.json
+C:\visualSTUDIO)projiects\praktika13\praktika13\bin\Debug\net8.0\praktika13.runtimeconfig.json
+C:\visualSTUDIO)projiects\praktika13\praktika13\bin\Debug\net8.0\praktika13.dll
+C:\visualSTUDIO)projiects\praktika13\praktika13\bin\Debug\net8.0\praktika13.pdb
+C:\visualSTUDIO)projiects\praktika13\praktika13\obj\Debug\net8.0\praktika13.GeneratedMSBuildEditorConfig.editorconfig
+C:\visualSTUDIO)projiects\praktika13\praktika13\obj\Debug\net8.0\praktika13.AssemblyInfoInputs.cache
+C:\visualSTUDIO)projiects\praktika13\praktika13\obj\Debug\net8.0\praktika13.AssemblyInfo.cs
+C:\visualSTUDIO)projiects\praktika13\praktika13\obj\Debug\net8.0\praktika13.csproj.CoreCompileInputs.cache
+C:\visualSTUDIO)projiects\praktika13\praktika13\obj\Debug\net8.0\praktika13.dll
+C:\visualSTUDIO)projiects\praktika13\praktika13\obj\Debug\net8.0\refint\praktika13.dll
+C:\visualSTUDIO)projiects\praktika13\praktika13\obj\Debug\net8.0\praktika13.pdb
+C:\visualSTUDIO)projiects\praktika13\praktika13\obj\Debug\net8.0\praktika13.genruntimeconfig.cache
+C:\visualSTUDIO)projiects\praktika13\praktika13\obj\Debug\net8.0\ref\praktika13.dll
