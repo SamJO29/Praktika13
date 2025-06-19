@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using System.Text;
 
-namespace Praktika13 {
+
 class Program
 {
     static void Main(string[] args)
@@ -114,7 +114,27 @@ class Program
             {
                 case 1: Task1(); break;
                 case 2: Task2(); break;
-                // ... остальные задания ...
+                case 3: Task3(); break;
+                case 4: Task4(); break;
+                case 5: Task5(); break;
+                case 6: Task6(); break;
+                case 7: Task7(); break;
+                case 8: Task8(); break;
+                case 9: Task9(); break;
+                case 10: Task10(); break;
+                case 11: Task11(); break;
+                case 12: Task12(); break;
+                case 13: Task13(); break;
+                case 14: Task14(); break;
+                case 15: Task15(); break;
+                case 16: Task16(); break;
+                case 17: Task17(); break;
+                case 18: Task18(); break;
+                case 19: Task19(); break;
+                case 20: Task20(); break;
+                case 21: Task21(); break;
+                case 22: Task22(); break;
+                case 23: Task23(); break;
                 case 24: Task24(); break;
             }
         }
@@ -421,6 +441,5 @@ class Program
         Console.WriteLine("Введите слово A2:");
         string a2 = Console.ReadLine();
         Console.WriteLine("Результат: " + text.Replace(a1, a2));
-        }
     }
 }
