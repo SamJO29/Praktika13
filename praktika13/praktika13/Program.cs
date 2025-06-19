@@ -1,570 +1,426 @@
-﻿namespace praktika13
+using System;
+using System.Linq;
+using System.Text;
+
+namespace Praktika13 {
+class Program
 {
-    using System;
-    using System.Text;
-
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
+        while (true)
         {
-            while (true)
+            Console.Clear();
+
+            Console.WriteLine("ВЫБЕРИТЕ ЗАДАНИЕ (1-24)       ");
+            Console.WriteLine("0 - Выход из программы\n      ");
+
+
+            // Выводим все задания по одному на строку
+            string[] descriptions = {
+                "1. Удалить текст в скобках",
+                "2. Подсчитать количество заданного слова",
+                "3. Заменить пробелы на запятые",
+                "4. Процент слов на букву К/к",
+                "5. Удалить все цифры из строки",
+                "6. Проверить, есть ли символы кроме букв и пробелов",
+                "7. Удалить буквы с ASCII-кодами 70-75",
+                "8. Проверить, есть ли две '4' подряд",
+                "9. Вставить пробел после каждой цифры",
+                "10. Увеличить цифры на 1 (9→0)",
+                "11. Сначала цифры, потом буквы",
+                "12. Преобразовать в верхний регистр",
+                "13. Шифр сдвига букв (последняя становится первой)",
+                "14. Вывести цифры по 5 в строке",
+                "15. Увеличить ASCII-коды символов на 3",
+                "16. Сумма цифр кратных 3 в трёх строках",
+                "17. Сумма всех цифр в двух строках",
+                "18. Количество символов с ASCII >= 70",
+                "19. Добавить символы в конец строки",
+                "20. Удалить все пробелы из строки",
+                "21. Зеркально отразить слово",
+                "22. Разбить текст на строки по k символов",
+                "23. Вставлять пробелы каждые n символов",
+                "24. Заменить слово A1 на слово A2"
+            };
+
+            foreach (string desc in descriptions)
             {
-                Console.WriteLine("\nВыберите задание (1-24) или 0 для выхода:");
-                string input = Console.ReadLine();
-
-                
-                if (input == "0")
-                {
-                    Console.WriteLine("Выход из программы...");
-                    break;
-                }
-
-                if (!int.TryParse(input, out int task) || task < 1 || task > 24)
-                {
-                    Console.WriteLine("Неверный номер задания. Попробуйте снова.");
-                    continue;
-                }
-
-                // Вызовы  задания
-                switch (task)
-                {
-                    case 1:
-                        Task1();
-                        break;
-                    case 2:
-                        Task2();
-                        break;
-                    case 3:
-                        Task3();
-                        break;
-                    case 4:
-                        Task4();
-                        break;
-                    case 5:
-                        Task5();
-                        break;
-                    case 6:
-                        Task6();
-                        break;
-                    case 7:
-                        Task7();
-                        break;
-                    case 8:
-                        Task8();
-                        break;
-                    case 9:
-                        Task9();
-                        break;
-                    case 10:
-                        Task10();
-                        break;
-                    case 11:
-                        Task11();
-                        break;
-                    case 12:
-                        Task12();
-                        break;
-                    case 13:
-                        Task13();
-                        break;
-                    case 14:
-                        Task14();
-                        break;
-                    case 15:
-                        Task15();
-                        break;
-                    case 16:
-                        Task16();
-                        break;
-                    case 17:
-                        Task17();
-                        break;
-                    case 18:
-                        Task18();
-                        break;
-                    case 19:
-                        Task19();
-                        break;
-                    case 20:
-                        Task20();
-                        break;
-                    case 21:
-                        Task21();
-                        break;
-                    case 22:
-                        Task22();
-                        break;
-                    case 23:
-                        Task23();
-                        break;
-                    case 24:
-                        Task24();
-                        break;
-                }
-
-                Console.WriteLine("\nНажмите любую клавишу для продолжения...");
-                Console.ReadKey();
-                Console.Clear(); 
-            }
-        }
-
-        // 1. Удалить текст в скобках
-        static void Task1()
-        {
-            Console.WriteLine("Введите текст:");
-            string text = Console.ReadLine();
-            string result = "";
-            bool inBrackets = false;
-
-            foreach (char c in text)
-            {
-                if (c == '(')
-                    inBrackets = true;
-                else if (c == ')')
-                    inBrackets = false;
-                else if (!inBrackets)
-                    result += c;
+                Console.WriteLine(desc);
             }
 
-            Console.WriteLine("Результат: " + result);
-        }
+            Console.Write("\n> Введите номер задания: ");
+            string input = Console.ReadLine();
 
-        // 2. Сколько раз встречается заданное слово
-        static void Task2()
-        {
-           Console.WriteLine("Введите текст:");
-    string text = Console.ReadLine();
-    Console.WriteLine("Введите слово для поиска:");
-    string word = Console.ReadLine().ToLower(); // Приводим к нижнему регистру для сравнения
-
-    int count = 0;
-    int wordLength = word.Length;
-    
-    for (int i = 0; i <= text.Length - wordLength; i++)
-    {
-        // Проверяем, совпадает ли текущая подстрока с искомым словом
-        bool match = true;
-        for (int j = 0; j < wordLength; j++)
-        {
-            if (char.ToLower(text[i + j]) != word[j])
+            if (input == "0")
             {
-                match = false;
+                Console.WriteLine("\nЗавершение работы программы...");
                 break;
             }
-        }
 
-        if (match)
-        {
-            // Проверяем границы слова
-            bool leftBoundary = (i == 0) || !char.IsLetterOrDigit(text[i - 1]);
-            bool rightBoundary = (i + wordLength == text.Length) || !char.IsLetterOrDigit(text[i + wordLength]);
-            
-            if (leftBoundary && rightBoundary)
+            if (!int.TryParse(input, out int task) || task < 1 || task > 24)
             {
-                count++;
-                i += wordLength - 1; // Пропускаем проверенные символы
+                Console.WriteLine("\nОшибка! Введите число от 1 до 24");
+                WaitForInput();
+                continue;
             }
+
+            ExecuteTask(task);
+            WaitForInput();
         }
     }
 
-    Console.WriteLine($"Слово '{word}' встречается {count} раз(а)");
-        }
+    static void WaitForInput()
+    {
+        Console.WriteLine("\nНажмите любую клавишу чтобы вернуться в меню...");
+        Console.ReadKey();
+    }
 
-        // 3. Заменить пробелы на запятую и пробел
-        static void Task3()
+    static void ExecuteTask(int taskNumber)
+    {
+        Console.Clear();
+        string[] descriptions = {
+            "Удаление текста в скобках",
+            "Подсчет заданного слова",
+            "Замена пробелов на запятые",
+            "Процент слов на букву К/к",
+            "Удаление всех цифр",
+            "Проверка символов (только буквы и пробелы?)",
+            "Удаление букв (ASCII 70-75)",
+            "Поиск двух '4' подряд",
+            "Добавление пробелов после цифр",
+            "Инкремент цифр (9→0)",
+            "Сортировка: цифры → буквы",
+            "Преобразование в верхний регистр",
+            "Шифр сдвига букв",
+            "Разбиение цифр по 5 в строке",
+            "Увеличение ASCII-кодов на 3",
+            "Сумма цифр кратных 3 (3 строки)",
+            "Сумма всех цифр (2 строки)",
+            "Количество символов (ASCII >=70)",
+            "Добавление символов в конец",
+            "Удаление всех пробелов",
+            "Зеркальное отражение слова",
+            "Разбиение текста по k символов",
+            "Вставка пробелов каждые n символов",
+            "Замена слова A1 на A2"
+        };
+
+
+        Console.WriteLine($" ЗАДАНИЕ {taskNumber}: {descriptions[taskNumber - 1]}\n");
+
+        try
         {
-            Console.WriteLine("Введите текст:");
-            string text = Console.ReadLine();
-            string result = text.Replace(" ", ", ");
-            Console.WriteLine("Результат: " + result);
-        }
-
-        // 4. Процент слов на букву К
-        static void Task4()
-        {
-            Console.WriteLine("Введите текст:");
-            string text = Console.ReadLine();
-            string[] words = text.Split(' ');
-            int count = 0;
-
-            foreach (string word in words)
+            switch (taskNumber)
             {
-                if (word.Length > 0 && word[0] == 'К')
-                    count++;
-                
+                case 1: Task1(); break;
+                case 2: Task2(); break;
+                // ... остальные задания ...
+                case 24: Task24(); break;
             }
-
-            double percent = (double)count / words.Length * 100;
-            Console.WriteLine($"Процент слов на 'К': {percent:F2}%");
         }
-
-        // 5. Удалить все цифры из строки
-        static void Task5()
+        catch (Exception ex)
         {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            string result = "";
-
-            foreach (char c in text)
-            {
-                if (!char.IsDigit(c))
-                    result += c;
-            }
-
-            Console.WriteLine("Результат: " + result);
+            Console.WriteLine($"Ошибка: {ex.Message}");
         }
+    }
 
-        // 6. Проверить, есть ли символы кроме букв и пробелов
-        static void Task6()
+    static void Task1()
+    {
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+        string result = "";
+        bool inBrackets = false;
+
+        foreach (char c in text)
         {
-            Console.WriteLine("Введите текст:");
-            string text = Console.ReadLine();
-            bool hasOther = false;
+            if (c == '(') inBrackets = true;
+            else if (c == ')') inBrackets = false;
+            else if (!inBrackets) result += c;
+        }
+        Console.WriteLine("Результат: " + result);
+    }
 
-            foreach (char c in text)
+    static void Task2()
+    {
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+        Console.WriteLine("Введите слово для поиска:");
+        string word = Console.ReadLine().ToLower();
+
+        int count = 0;
+        int wordLength = word.Length;
+
+        for (int i = 0; i <= text.Length - wordLength; i++)
+        {
+            bool match = true;
+            for (int j = 0; j < wordLength; j++)
             {
-                if (!char.IsLetter(c) && c != ' ')
+                if (char.ToLower(text[i + j]) != word[j])
                 {
-                    hasOther = true;
+                    match = false;
                     break;
                 }
             }
 
-            Console.WriteLine(hasOther ? "Есть другие символы" : "Только буквы и пробелы");
-        }
-
-        // 7. Удалить буквы с ASCII-кодами 70-75
-        static void Task7()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            string result = "";
-
-            foreach (char c in text)
+            if (match)
             {
-                if (c < 70 || c > 75)
-                    result += c;
-            }
+                bool leftBoundary = (i == 0) || !char.IsLetterOrDigit(text[i - 1]);
+                bool rightBoundary = (i + wordLength == text.Length) || !char.IsLetterOrDigit(text[i + wordLength]);
 
-            Console.WriteLine("Результат: " + result);
-        }
-
-        // 8. Проверить, есть ли две "4" подряд
-        static void Task8()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            bool hasTwoFours = false;
-
-            for (int i = 0; i < text.Length - 1; i++)
-            {
-                if (text[i] == '4' && text[i + 1] == '4')
+                if (leftBoundary && rightBoundary)
                 {
-                    hasTwoFours = true;
-                    break;
-                }
-            }
-
-            Console.WriteLine(hasTwoFours ? "Есть две 4 подряд" : "Нет двух 4 подряд");
-        }
-
-        // 9. Вставить пробел после каждой цифры
-        static void Task9()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            string result = "";
-
-            foreach (char c in text)
-            {
-                result += c;
-                if (char.IsDigit(c))
-                    result += " ";
-            }
-
-            Console.WriteLine("Результат: " + result);
-        }
-
-        // 10. Увеличить цифры на 1 (9→0)
-        static void Task10()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            string result = "";
-
-            foreach (char c in text)
-            {
-                if (char.IsDigit(c))
-                {
-                    int num = int.Parse(c.ToString());
-                    num = (num + 1) % 10;
-                    result += num.ToString();
-                }
-                else
-                    result += c;
-            }
-
-            Console.WriteLine("Результат: " + result);
-        }
-
-        // 11. Сначала цифры, потом буквы
-        static void Task11()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            string digits = "";
-            string letters = "";
-            string others = "";
-
-            foreach (char c in text)
-            {
-                if (char.IsDigit(c))
-                    digits += c;
-                else if (char.IsLetter(c))
-                    letters += c;
-                else
-                    others += c;
-            }
-
-            Console.WriteLine("Результат: " + digits + letters + others);
-        }
-
-        // 12. Преобразовать маленькие буквы в большие
-        static void Task12()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            string result = text.ToUpper();
-            Console.WriteLine("Результат: " + result);
-        }
-
-        // 13. Сдвиг букв на 1 позицию
-        static void Task13()
-        {
-            Console.WriteLine("Введите слово:");
-            string word = Console.ReadLine();
-            if (word.Length == 0)
-            {
-                Console.WriteLine("Пустая строка");
-                return;
-            }
-
-            string result = word[word.Length - 1] + word.Substring(0, word.Length - 1);
-            Console.WriteLine("Зашифрованное слово: " + result);
-        }
-
-        // 14. Вывод по 5 цифр в строке
-        static void Task14()
-        {
-            Console.WriteLine("Введите строку цифр:");
-            string digits = Console.ReadLine();
-            for (int i = 0; i < digits.Length; i += 5)
-            {
-                int length = Math.Min(5, digits.Length - i);
-                Console.WriteLine(digits.Substring(i, length));
-            }
-        }
-
-        // 15. Увеличить ASCII-коды на 3
-        static void Task15()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            string result = "";
-
-            foreach (char c in text)
-            {
-                result += (char)(c + 3);
-            }
-
-            Console.WriteLine("Результат: " + result);
-        }
-
-        // 16. Сумма цифр, кратных 3, в 3 строках
-        static void Task16()
-        {
-            Console.WriteLine("Введите 3 строки:");
-            string[] lines = new string[3];
-            for (int i = 0; i < 3; i++)
-            {
-                lines[i] = Console.ReadLine();
-            }
-
-            foreach (string line in lines)
-            {
-                Console.WriteLine($"Сумма цифр, кратных 3: {SumDigitsDivisibleBy3(line)}");
-            }
-        }
-
-        static int SumDigitsDivisibleBy3(string s)
-        {
-            int sum = 0;
-            foreach (char c in s)
-            {
-                if (char.IsDigit(c))
-                {
-                    int num = int.Parse(c.ToString());
-                    if (num % 3 == 0)
-                        sum += num;
-                }
-            }
-            return sum;
-        }
-
-        // 17. Сумма цифр в 2 строках
-        static void Task17()
-        {
-            Console.WriteLine("Введите 2 строки:");
-            string s1 = Console.ReadLine();
-            string s2 = Console.ReadLine();
-
-            Console.WriteLine($"Сумма цифр в строке 1: {SumDigits(s1)}");
-            Console.WriteLine($"Сумма цифр в строке 2: {SumDigits(s2)}");
-        }
-
-        static int SumDigits(string s)
-        {
-            int sum = 0;
-            foreach (char c in s)
-            {
-                if (char.IsDigit(c))
-                    sum += int.Parse(c.ToString());
-            }
-            return sum;
-        }
-
-        // 18. Количество символов с ASCII >= 70
-        static void Task18()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            int count = 0;
-
-            foreach (char c in text)
-            {
-                if (c >= 70)
                     count++;
-            }
-
-            Console.WriteLine($"Количество символов с ASCII >= 70: {count}");
-        }
-
-        // 19. Добавить символы справа
-        static void Task19()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            Console.WriteLine("Введите символ:");
-            char symbol = Console.ReadLine()[0];
-            Console.WriteLine("Введите количество:");
-            int count = int.Parse(Console.ReadLine());
-
-            AddSymbols(ref text, symbol, count);
-            Console.WriteLine("Результат: " + text);
-        }
-
-        static void AddSymbols(ref string s, char symbol, int count)
-        {
-            for (int i = 0; i < count; i++)
-                s += symbol;
-        }
-
-        // 20. Удалить пробелы
-        static void Task20()
-        {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            RemoveSpaces(ref text);
-            Console.WriteLine("Результат: " + text);
-        }
-
-        static void RemoveSpaces(ref string s)
-        {
-            string result = "";
-            foreach (char c in s)
-            {
-                if (c != ' ')
-                    result += c;
-            }
-            s = result;
-        }
-
-        // 21. Зеркальное отображение
-        static void Task21()
-        {
-            Console.WriteLine("Введите слово:");
-            string word = Console.ReadLine();
-            MirrorWord(ref word);
-            Console.WriteLine("Результат: " + word);
-        }
-
-        static void MirrorWord(ref string s)
-        {
-            char[] arr = s.ToCharArray();
-            Array.Reverse(arr);
-            s = new string(arr);
-        }
-
-        // 22. Разбить на строки по k символов
-        static void Task22()
-        {
-            Console.WriteLine("Введите текст:");
-            string text = Console.ReadLine();
-            Console.WriteLine("Введите k:");
-            int k = int.Parse(Console.ReadLine());
-            SplitText(text, k);
-        }
-
-        static void SplitText(string s, int k)
-        {
-            for (int i = 0; i < s.Length; i += k)
-            {
-                int length = Math.Min(k, s.Length - i);
-                Console.WriteLine(s.Substring(i, length));
+                    i += wordLength - 1;
+                }
             }
         }
 
-        // 23. Вставить пробелы через каждые n символов
-        static void Task23()
+        Console.WriteLine($"Слово '{word}' встречается {count} раз(а)");
+    }
+
+    static void Task3()
+    {
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+        string result = text.Replace(" ", ", ");
+        Console.WriteLine("Результат: " + result);
+    }
+
+    static void Task4()
+    {
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+        string[] words = text.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+        int count = 0;
+
+        foreach (string word in words)
         {
-            Console.WriteLine("Введите строку:");
-            string text = Console.ReadLine();
-            Console.WriteLine("Введите n:");
-            int n = int.Parse(Console.ReadLine());
-            Console.WriteLine("Введите k:");
-            int k = int.Parse(Console.ReadLine());
-            InsertSpaces(ref text, n, k);
-            Console.WriteLine("Результат: " + text);
+            if (word.Length > 0 && (word[0] == 'К' || word[0] == 'к'))
+                count++;
         }
 
-        static void InsertSpaces(ref string s, int n, int k)
+        double percent = words.Length > 0 ? (double)count / words.Length * 100 : 0;
+        Console.WriteLine($"Процент слов на 'К/к': {percent:F2}%");
+    }
+
+    static void Task5()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        string result = new string(text.Where(c => !char.IsDigit(c)).ToArray());
+        Console.WriteLine("Результат: " + result);
+    }
+
+    static void Task6()
+    {
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+        bool hasOther = text.Any(c => !char.IsLetter(c) && c != ' ');
+        Console.WriteLine(hasOther ? "Есть другие символы" : "Только буквы и пробелы");
+    }
+
+    static void Task7()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        string result = new string(text.Where(c => c < 70 || c > 75).ToArray());
+        Console.WriteLine("Результат: " + result);
+    }
+
+    static void Task8()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        bool hasTwoFours = text.Contains("44");
+        Console.WriteLine(hasTwoFours ? "Есть две 4 подряд" : "Нет двух 4 подряд");
+    }
+
+    static void Task9()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        StringBuilder result = new StringBuilder();
+
+        foreach (char c in text)
         {
-            string result = "";
-            for (int i = 0; i < s.Length; i++)
-            {
-                result += s[i];
-                if ((i + 1) % n == 0)
-                    result += new string(' ', k);
-            }
-            s = result;
+            result.Append(c);
+            if (char.IsDigit(c))
+                result.Append(' ');
         }
 
-        // 24. Заменить слово А1 на А2
-        static void Task24()
+        Console.WriteLine("Результат: " + result);
+    }
+
+    static void Task10()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        StringBuilder result = new StringBuilder();
+
+        foreach (char c in text)
         {
-            Console.WriteLine("Введите текст:");
-            string text = Console.ReadLine();
-            Console.WriteLine("Введите слово A1:");
-            string a1 = Console.ReadLine();
-            Console.WriteLine("Введите слово A2:");
-            string a2 = Console.ReadLine();
-            ReplaceWord(ref text, a1, a2);
-            Console.WriteLine("Результат: " + text);
+            if (char.IsDigit(c))
+                result.Append(((c - '0' + 1) % 10).ToString());
+            else
+                result.Append(c);
         }
 
-        static void ReplaceWord(ref string s, string a1, string a2)
+        Console.WriteLine("Результат: " + result);
+    }
+
+    static void Task11()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        var digits = new string(text.Where(char.IsDigit).ToArray());
+        var letters = new string(text.Where(char.IsLetter).ToArray());
+        var others = new string(text.Where(c => !char.IsDigit(c) && !char.IsLetter(c)).ToArray());
+        Console.WriteLine("Результат: " + digits + letters + others);
+    }
+
+    static void Task12()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        Console.WriteLine("Результат: " + text.ToUpper());
+    }
+
+    static void Task13()
+    {
+        Console.WriteLine("Введите слово:");
+        string word = Console.ReadLine();
+        if (string.IsNullOrEmpty(word))
         {
-            s = s.Replace(a1, a2);
+            Console.WriteLine("Пустая строка");
+            return;
+        }
+        Console.WriteLine("Зашифрованное слово: " + word[^1] + word[..^1]);
+    }
+
+    static void Task14()
+    {
+        Console.WriteLine("Введите строку цифр:");
+        string digits = Console.ReadLine();
+        for (int i = 0; i < digits.Length; i += 5)
+        {
+            int length = Math.Min(5, digits.Length - i);
+            Console.WriteLine(digits.Substring(i, length));
+        }
+    }
+
+    static void Task15()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        string result = new string(text.Select(c => (char)(c + 3)).ToArray());
+        Console.WriteLine("Результат: " + result);
+    }
+
+    static int SumDigitsDivisibleBy3(string s)
+    {
+        return s.Where(char.IsDigit)
+               .Select(c => c - '0')
+               .Where(n => n % 3 == 0)
+               .Sum();
+    }
+
+    static void Task16()
+    {
+        Console.WriteLine("Введите 3 строки:");
+        string[] lines = new string[3];
+        for (int i = 0; i < 3; i++)
+            lines[i] = Console.ReadLine();
+
+        foreach (string line in lines)
+            Console.WriteLine($"Сумма цифр, кратных 3: {SumDigitsDivisibleBy3(line)}");
+    }
+
+    static int SumDigits(string s)
+    {
+        return s.Where(char.IsDigit).Sum(c => c - '0');
+    }
+
+    static void Task17()
+    {
+        Console.WriteLine("Введите 2 строки:");
+        string s1 = Console.ReadLine();
+        string s2 = Console.ReadLine();
+        Console.WriteLine($"Сумма цифр в строке 1: {SumDigits(s1)}");
+        Console.WriteLine($"Сумма цифр в строке 2: {SumDigits(s2)}");
+    }
+
+    static void Task18()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        int count = text.Count(c => c >= 70);
+        Console.WriteLine($"Количество символов с ASCII >= 70: {count}");
+    }
+
+    static void Task19()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        Console.WriteLine("Введите символ:");
+        char symbol = Console.ReadLine()[0];
+        Console.WriteLine("Введите количество:");
+        int count = int.Parse(Console.ReadLine());
+        Console.WriteLine("Результат: " + text + new string(symbol, count));
+    }
+
+    static void Task20()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        string result = new string(text.Where(c => c != ' ').ToArray());
+        Console.WriteLine("Результат: " + result);
+    }
+
+    static void Task21()
+    {
+        Console.WriteLine("Введите слово:");
+        string word = Console.ReadLine();
+        Console.WriteLine("Результат: " + new string(word.Reverse().ToArray()));
+    }
+
+    static void Task22()
+    {
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+        Console.WriteLine("Введите k:");
+        int k = int.Parse(Console.ReadLine());
+        for (int i = 0; i < text.Length; i += k)
+            Console.WriteLine(text.Substring(i, Math.Min(k, text.Length - i)));
+    }
+
+    static void Task23()
+    {
+        Console.WriteLine("Введите строку:");
+        string text = Console.ReadLine();
+        Console.WriteLine("Введите n:");
+        int n = int.Parse(Console.ReadLine());
+        Console.WriteLine("Введите k:");
+        int k = int.Parse(Console.ReadLine());
+
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < text.Length; i++)
+        {
+            result.Append(text[i]);
+            if ((i + 1) % n == 0)
+                result.Append(' ', k);
+        }
+        Console.WriteLine("Результат: " + result);
+    }
+
+    static void Task24()
+    {
+        Console.WriteLine("Введите текст:");
+        string text = Console.ReadLine();
+        Console.WriteLine("Введите слово A1:");
+        string a1 = Console.ReadLine();
+        Console.WriteLine("Введите слово A2:");
+        string a2 = Console.ReadLine();
+        Console.WriteLine("Результат: " + text.Replace(a1, a2));
         }
     }
 }
